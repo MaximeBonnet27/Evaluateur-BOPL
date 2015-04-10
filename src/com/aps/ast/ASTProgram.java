@@ -40,7 +40,7 @@ public class ASTProgram extends AST{
 		
 		Object resultat= seq.eval(env);
 		
-		System.out.println("environnement:"
+		System.out.println("Environnement:"
 				+ "[");
 		env.print();
 		System.out.println("]");

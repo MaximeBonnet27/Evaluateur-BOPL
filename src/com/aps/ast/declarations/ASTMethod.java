@@ -48,7 +48,8 @@ public class ASTMethod extends AST {
 	
 	@Override
 	public Object eval(IEnvironment env) throws Exception{
-		envLocal=Environment.EMPTYENV;
+		//envLocal=Environment.EMPTYENV;
+		envLocal=env.clone();
 		for(ASTDeclaration arg : args){
 			envLocal=(IEnvironment) arg.eval(envLocal);
 		}
@@ -56,6 +57,7 @@ public class ASTMethod extends AST {
 			envLocal=(IEnvironment) local.eval(envLocal);
 		}
 		
+		envLocal=envLocal.extend(id.toString(), this);//appel recursif
 		return env.extend(id.toString(), this);
 	}
 	
@@ -63,10 +65,12 @@ public class ASTMethod extends AST {
 		for(int i=0;i<args.size();i++){
 			envLocal.update(args.get(i).getId(0).toString(), arguments.get(i).eval(env));
 		}
-		//System.out.println(instance);
 		envLocal=envLocal.concatener(instance.getDictionnaire());
-		envLocal=envLocal.concatener(env);
+		//envLocal=envLocal.concatener(env);
 
+		System.out.println("*******************************");
+		System.out.println(envLocal);
+		System.out.println("*******************************");
 		return seq.eval(envLocal);
 		
 	}
@@ -76,6 +80,11 @@ public class ASTMethod extends AST {
 		ASTMethod resultat= new ASTMethod((ASTClassType)classe.clone(), (ASTid)id.clone(), (ArrayList<ASTDeclaration>)args.clone(),(ArrayList<ASTDeclaration>) locals.clone(), (ASTSequence)seq.clone());
 		resultat.setEnvLocal(envLocal);
 		return resultat;
+	}
+
+	@Override
+	public String toString() {
+		return id.toString();
 	}
 	
 	

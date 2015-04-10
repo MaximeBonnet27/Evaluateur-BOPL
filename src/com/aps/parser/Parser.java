@@ -217,7 +217,7 @@ final static short yylen[] = {                            2,
     4,    0,    1,    1,    2,    0,    3,    3,    6,    0,
     2,    0,    2,    0,    2,    1,    1,    1,    2,    3,
     1,    3,    1,    1,    2,    7,    0,    1,    3,    1,
-    2,    0,    1,    3,    2,    1,    6,    3,    5,    2,
+    2,    0,    1,    3,    2,    1,    6,    5,    3,    2,
     2,    6,    4,    1,    1,    1,    1,    1,    3,    6,
     2,    3,    3,    3,    3,    3,    3,    3,    3,    2,
     3,    3,    0,    1,    1,    3,
@@ -279,7 +279,7 @@ static short yytable[];
 static { yytable();}
 static void yytable(){
 yytable = new short[]{                         37,
-   40,   41,   65,   38,   39,   65,    8,   95,   12,   58,
+   40,   41,   65,   39,   38,   65,    8,   95,   12,   58,
    26,   49,   58,    1,   49,   14,   15,    3,   13,   24,
    92,   93,   42,   14,   15,   21,   12,   58,   12,   49,
    59,   12,   51,   59,   14,   51,   13,   15,   13,   66,
@@ -302,7 +302,7 @@ yytable = new short[]{                         37,
    59,   60,   61,   62,   63,   64,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,   27,   37,    7,
    28,   29,   30,   31,    0,    0,    0,    0,   40,   41,
-   32,   38,   39,   94,    0,   49,    0,   49,    0,   33,
+   32,   39,   38,   94,    0,   49,    0,   49,    0,   33,
    34,   35,   49,   49,   49,   49,   49,   49,   49,   49,
     0,   58,   36,   49,    0,   58,   51,   49,    0,    0,
    58,    0,   49,   51,   51,   51,   51,   51,   51,   51,
@@ -444,8 +444,8 @@ final static String yyrule[] = {
 "InstrSeqNonEmpty : Instr ';'",
 "InstrSeqNonEmpty : Instr",
 "Instr : Expression GET Id '(' ArgList ')'",
-"Instr : Id SET Expression",
 "Instr : Expression GET Id SET Expression",
+"Instr : Id SET Expression",
 "Instr : RETURN Expression",
 "Instr : WRITELN Expression",
 "Instr : IF Expression THEN InstrList ELSE InstrList",
@@ -851,11 +851,11 @@ case 37:
 break;
 case 38:
 //#line 181 "lexer/bopl.y"
-{ yyval.obj = new ASTSetVar((ASTid)val_peek(2).obj,(IASTExpression)val_peek(0).obj); }
+{ yyval.obj = new ASTSetField((IASTExpression)val_peek(4).obj,(ASTid)val_peek(2).obj,(IASTExpression)val_peek(0).obj); }
 break;
 case 39:
 //#line 182 "lexer/bopl.y"
-{ yyval.obj = new ASTSetField((IASTExpression)val_peek(4).obj,(ASTid)val_peek(2).obj,(IASTExpression)val_peek(0).obj); }
+{ yyval.obj = new ASTSetVar((ASTid)val_peek(2).obj,(IASTExpression)val_peek(0).obj); }
 break;
 case 40:
 //#line 183 "lexer/bopl.y"

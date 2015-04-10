@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import com.aps.ast.AST;
 import com.aps.ast.declarations.ASTMethod;
-import com.aps.ast.expressions.ASTExpression;
 import com.aps.ast.expressions.ASTid;
 import com.aps.ast.expressions.IASTExpression;
 import com.aps.ast.instructions.IASTInstruction;
@@ -34,16 +33,7 @@ public class ASTCall extends AST implements IASTInstruction, IASTExpression{
 	public Object eval(IEnvironment env) throws Exception{
 		
 		ASTInstance instance= (ASTInstance) this.instance.eval(env);
-		System.out.println("*************environNement SELF="+instance.getClasseName()+"*************");
-		System.out.println(instance.getDictionnaire());
-		System.out.println("*******************************************");
-		System.out.println("************environnement SUPER="+((ASTInstance)instance.getDictionnaire().getValue("super")).getClasseName()+"************");
-		System.out.println(((ASTInstance)instance.getDictionnaire().getValue("super")).getDictionnaire());
-		System.out.println("*******************************************");
-		System.out.println(methode);
 		ASTMethod m=instance.getMethode(methode.toString());
-		if(m==null)
-			System.out.println("nULLLLLLLLLLLLLLLLLLLLL");
 		m = (ASTMethod)m.clone();
 		return m.call(env,instance, args);
 	}

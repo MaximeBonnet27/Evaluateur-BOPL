@@ -49,9 +49,17 @@ public class ASTInstance extends AST {
 		}
 	}
 	
+	
+
 	@Override
 	public String toString() {
-		return "ASTInstance [classe=" + classe + "]";
+		StringBuilder sb = new StringBuilder();
+		sb.append("ASTInstance [classe = " + getClasseName() +" , \n[\n");
+		for(String nomField : classe.getFields()){
+			sb.append(nomField + " = " + getAttribute(nomField)+ ",\n");
+		}
+		sb.append("]\n]\n");
+		return sb.toString();
 	}
 
 	@Override
@@ -67,13 +75,21 @@ public class ASTInstance extends AST {
 	}
 	
 	public void updateAttribute(String name,Object value){
-		
+		Object att = getDictionnaire().getValue(name);
+		if(att==null){
+			getSuper().updateAttribute(name, value);
+		}
+		else{
+			try {
+				getDictionnaire().update(name, value);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public ASTMethod getMethode(String name){
 		ASTMethod methode;
-		System.out.println(name+"? [");
-		System.out.println(getDictionnaire()+"\n]");
 		methode = (ASTMethod) getDictionnaire().getValue(name);
 		if(methode==null)
 			methode=(ASTMethod) getSuper().getAttribute(name);

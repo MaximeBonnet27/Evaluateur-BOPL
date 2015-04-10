@@ -31,11 +31,13 @@ public class ASTSequence extends ASTInstruction{
 			return AST.CONSTANT_NULL;
 		else {
 			for (IASTInstruction i : instructions) {
-				if ((val = i.eval(env)) != AST.CONSTANT_NULL) {
+				val = i.eval(env);
+				if(i instanceof ASTReturn){
 					return val;
 				}
 			}
 		}
+
 		return AST.CONSTANT_NULL;
 	}
 

@@ -178,8 +178,8 @@ InstrSeqNonEmpty:
 
 Instr: 
 	 Expression GET Id '(' ArgList ')'				{ $$ = new ASTCall((IASTExpression)$1,(ASTid)$3,(ArrayList<IASTExpression>)$5); }
+	| Expression GET Id SET Expression             { $$ = new ASTSetField((IASTExpression)$1,(ASTid)$3,(IASTExpression)$5); }
 	| Id SET Expression 							{ $$ = new ASTSetVar((ASTid)$1,(IASTExpression)$3); }
-	| Expression GET Id SET Expression  			{ $$ = new ASTSetField((IASTExpression)$1,(ASTid)$3,(IASTExpression)$5); }
 	| RETURN Expression 							{ $$ = new ASTReturn((IASTExpression)$2);}
 	| WRITELN Expression 							{ $$ = new ASTWrite((IASTExpression)$2); }
 	| IF Expression THEN InstrList ELSE InstrList  	{ $$ = new ASTAlternative((IASTExpression)$2,(ASTSequence)$4,(ASTSequence)$6); }

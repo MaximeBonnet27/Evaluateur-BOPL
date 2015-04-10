@@ -29,10 +29,10 @@ public class ASTClass extends ASTExpression{
 	private IEnvironment dictionnaireClasse;
 
 
-	public ASTClass(ASTid name, ASTClassType superClass,ArrayList<ASTDeclaration> fields, ArrayList<ASTMethod> methods) {
+	public ASTClass(ASTid name, ASTClassType superClassType,ArrayList<ASTDeclaration> fields, ArrayList<ASTMethod> methods) {
 		super();
 		this.name = name;
-		this.superClassType = superClass;
+		this.superClassType = superClassType;
 		this.fields = fields;
 		this.methods = methods;
 
@@ -44,14 +44,8 @@ public class ASTClass extends ASTExpression{
 
 	@Override
 	public Object eval(IEnvironment env)throws Exception{
-		//if(superClass.toString().equals("obj")){
 			superClass=(ASTClass) superClassType.eval(env);
 			this.dictionnaireClasse=Environment.EMPTYENV;
-		/*}else{
-
-			ASTInstance superclass=new ASTInstance((ASTClass)superClass.eval(env));
-			this.dictionnaireClasse = superclass.getDictionnaire();
-		}*/
 
 		for(ASTDeclaration d : fields){
 			dictionnaireClasse=(IEnvironment) d.eval(dictionnaireClasse);
@@ -68,6 +62,7 @@ public class ASTClass extends ASTExpression{
 	public IASTExpression clone(){
 		ASTClass resultat= new ASTClass((ASTid)name.clone(),(ASTClassType)superClassType.clone(),(ArrayList<ASTDeclaration>)fields.clone(),(ArrayList<ASTMethod>) methods.clone());
 		resultat.setDictionnaireClasse(dictionnaireClasse.clone());
+		resultat.superClass=superClass;
 		return resultat;
 	}
 
@@ -87,7 +82,21 @@ public class ASTClass extends ASTExpression{
 
 	@Override
 	public String toString() {
-		return "ASTClass [name=" + name + "]";
+		return "ASTClass [name=" + name + ", superClassType=" + superClassType
+				+ ", fields=" + getFields()
+				+ ", methods=" + methods+"]";
+	}
+
+	public ArrayList<String> getFields(){
+		ArrayList<String> res = new ArrayList<>();
+		for(ASTDeclaration d : fields){
+			for(ASTid id : d.getVariables()){
+				res.add(id.toString());
+			}
+		}
+		if(superClass != null)
+		res.addAll(superClass.getFields());
+		return res;
 	}
 
 

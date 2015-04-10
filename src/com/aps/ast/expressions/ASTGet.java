@@ -25,7 +25,8 @@ public class ASTGet extends AbstractBinaryOperator{
 	@Override
 	public Object eval(IEnvironment env) throws Exception{
 		ASTInstance instance=(ASTInstance) leftOperand.eval(env);
-		return instance.getDictionnaire().getValue(rightOperand.toString());
+		//return instance.getDictionnaire().getValue(rightOperand.toString());
+		return instance.getAttribute(rightOperand.toString());
 	}
 
 }

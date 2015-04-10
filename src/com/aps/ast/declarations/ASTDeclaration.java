@@ -44,7 +44,10 @@ public class ASTDeclaration extends AST{
 	public ASTid getId(int index){
 		return variables.get(index);
 	}
-
+	
+	public ArrayList<ASTid> getVariables() {
+		return variables;
+	}
 	@Override
 	public Object clone() {
 		return new ASTDeclaration((ASTClassType)classe.clone(), (ASTid)variables.clone());
