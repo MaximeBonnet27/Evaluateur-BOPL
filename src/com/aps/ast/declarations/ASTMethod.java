@@ -67,7 +67,7 @@ public class ASTMethod extends AST {
 		}
 		envLocal=envLocal.concatener(instance.getDictionnaire());
 		//envLocal=envLocal.concatener(env);
-
+		//envLocal=instance.deSucrage(envLocal);
 		System.out.println("*******************************");
 		System.out.println(envLocal);
 		System.out.println("*******************************");

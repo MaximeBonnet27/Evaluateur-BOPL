@@ -58,7 +58,7 @@ public class ASTInstance extends AST {
 		for(String nomField : classe.getFields()){
 			sb.append(nomField + " = " + getAttribute(nomField)+ ",\n");
 		}
-		sb.append("]\n]\n");
+		sb.append("]\n");
 		return sb.toString();
 	}
 
@@ -96,5 +96,11 @@ public class ASTInstance extends AST {
 		return methode;
 	}
 	
+	public IEnvironment deSucrage(IEnvironment env){
+		for(String attName:classe.getFields()){
+			env=env.extend(attName, getAttribute(attName));
+		}
+		return env;
+	}
 
 }
