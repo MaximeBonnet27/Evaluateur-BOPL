@@ -4,7 +4,7 @@
 package com.aps.ast.instructions;
 
 import com.aps.ast.AST;
-import com.aps.ast.expressions.ASTExpression;
+import com.aps.ast.expressions.IASTExpression;
 import com.aps.environnement.IEnvironment;
 
 /**
@@ -13,10 +13,10 @@ import com.aps.environnement.IEnvironment;
  */
 public class ASTWhile extends ASTInstruction {
 
-	private ASTExpression condition;
+	private IASTExpression condition;
 	private ASTSequence seq;
 	
-	public ASTWhile(ASTExpression condition, ASTSequence seq) {
+	public ASTWhile(IASTExpression condition, ASTSequence seq) {
 		super();
 		this.condition = condition;
 		this.seq = seq;

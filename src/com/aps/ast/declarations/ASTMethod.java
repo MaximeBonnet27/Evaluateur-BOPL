@@ -10,6 +10,7 @@ import com.aps.ast.IAST;
 import com.aps.ast.call.ASTInstance;
 import com.aps.ast.expressions.ASTExpression;
 import com.aps.ast.expressions.ASTid;
+import com.aps.ast.expressions.IASTExpression;
 import com.aps.ast.instructions.ASTSequence;
 import com.aps.environnement.Environment;
 import com.aps.environnement.IEnvironment;
@@ -40,6 +41,11 @@ public class ASTMethod extends AST {
 	private void setEnvLocal(IEnvironment envLocal) {
 		this.envLocal = envLocal;
 	}
+	
+	public void setSelf(ASTInstance self){
+		envLocal = envLocal.extend("self", self);
+	}
+	
 	@Override
 	public Object eval(IEnvironment env) throws Exception{
 		envLocal=Environment.EMPTYENV;
@@ -53,11 +59,11 @@ public class ASTMethod extends AST {
 		return env.extend(id.toString(), this);
 	}
 	
-	public Object call(IEnvironment env,ASTInstance instance,ArrayList<ASTExpression> arguments) throws Exception{
+	public Object call(IEnvironment env,ASTInstance instance,ArrayList<IASTExpression> arguments) throws Exception{
 		for(int i=0;i<args.size();i++){
 			envLocal.update(args.get(i).getId(0).toString(), arguments.get(i).eval(env));
 		}
-		envLocal = envLocal.extend("self", instance);
+		//System.out.println(instance);
 		envLocal=envLocal.concatener(instance.getDictionnaire());
 		envLocal=envLocal.concatener(env);
 

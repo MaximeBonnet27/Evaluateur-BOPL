@@ -6,6 +6,7 @@ package com.aps.ast.instructions;
 import com.aps.ast.AST;
 import com.aps.ast.IAST;
 import com.aps.ast.expressions.ASTExpression;
+import com.aps.ast.expressions.IASTExpression;
 import com.aps.ast.operators.AbstractUnaryOperator;
 import com.aps.environnement.IEnvironment;
 
@@ -15,10 +16,10 @@ import com.aps.environnement.IEnvironment;
  */
 public class ASTReturn extends ASTInstruction{
 
-	private ASTExpression exp;
+	private IASTExpression exp;
 		
-	public ASTReturn(ASTExpression operand) {
-		exp = operand;
+	public ASTReturn(IASTExpression obj) {
+		exp = obj;
 	}
 
 	@Override

@@ -38,7 +38,7 @@ public abstract class ASTExpression extends AST implements IASTExpression{
 		
 	}
 	@Override
-	public Object clone() {
+	public IASTExpression clone() {
 		return this;
 	}
 	

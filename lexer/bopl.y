@@ -82,7 +82,7 @@ NonEmptyClasses : Class 			{ArrayList<ASTClass> classes=new ArrayList<ASTClass>(
 									classes.add((ASTClass)$1);
 									$$=classes;}
        | Class NonEmptyClasses 		{ArrayList<ASTClass> classes=(ArrayList<ASTClass>)$2;
-       								classes.add((ASTClass)$1);
+       								classes.add(0,(ASTClass)$1);
        								$$=classes;}
 ;
 
@@ -117,7 +117,7 @@ VarDecs : VarDec 		{ ArrayList<ASTDeclaration> declarations = new ArrayList<ASTD
 						declarations.add((ASTDeclaration)$1);
 						$$ = declarations; }
 	| VarDecs VarDec 	{ ArrayList<ASTDeclaration> declarations = (ArrayList<ASTDeclaration>) $1;
-						declarations.add((ASTDeclaration)$2);
+						declarations.add(0,(ASTDeclaration)$2);
 						$$ = declarations; }
 ;
 
@@ -128,7 +128,7 @@ Ids : Id 			{ ArrayList<ASTid> ids =  new ArrayList<ASTid>();
 					ids.add((ASTid)$1);
 					$$ = ids; } 
     | Id "," Ids = 	{ ArrayList<ASTid> ids = (ArrayList<ASTid>) $3;
-					ids.add((ASTid)$1);
+					ids.add(0,(ASTid)$1);
 					$$ = ids; }
 ;
 
@@ -139,7 +139,7 @@ Methods : Method 		{ ArrayList<ASTMethod> methods= new ArrayList<ASTMethod>();
 						methods.add((ASTMethod)$1);
 						$$ = methods; }
 	| Methods Method 	{ ArrayList<ASTMethod> methods=(ArrayList<ASTMethod> ) $1;
-						methods.add((ASTMethod)$2);
+						methods.add(0,(ASTMethod)$2);
 						$$ = methods; }
 ;
 
@@ -177,13 +177,13 @@ InstrSeqNonEmpty:
 ;
 
 Instr: 
-	 Expression GET Id '(' ArgList ')'				{ $$ = new ASTCall((ASTExpression)$1,(ASTid)$3,(ArrayList<ASTExpression>)$5); }
-	| Id SET Expression 							{ $$ = new ASTSetVar((ASTid)$1,(ASTExpression)$3); }
-	| Expression GET Id SET Expression  			{ $$ = new ASTSetField((ASTExpression)$1,(ASTid)$3,(ASTExpression)$5); }
-	| RETURN Expression 							{ $$ = new ASTReturn((ASTExpression)$2);}
-	| WRITELN Expression 							{ $$ = new ASTWrite((ASTExpression)$2); }
-	| IF Expression THEN InstrList ELSE InstrList  	{ $$ = new ASTAlternative((ASTExpression)$2,(ASTSequence)$4,(ASTSequence)$6); }
-	| WHILE Expression DO InstrList 				{ $$ = new ASTWhile((ASTExpression)$2,(ASTSequence)$4); }
+	 Expression GET Id '(' ArgList ')'				{ $$ = new ASTCall((IASTExpression)$1,(ASTid)$3,(ArrayList<IASTExpression>)$5); }
+	| Id SET Expression 							{ $$ = new ASTSetVar((ASTid)$1,(IASTExpression)$3); }
+	| Expression GET Id SET Expression  			{ $$ = new ASTSetField((IASTExpression)$1,(ASTid)$3,(IASTExpression)$5); }
+	| RETURN Expression 							{ $$ = new ASTReturn((IASTExpression)$2);}
+	| WRITELN Expression 							{ $$ = new ASTWrite((IASTExpression)$2); }
+	| IF Expression THEN InstrList ELSE InstrList  	{ $$ = new ASTAlternative((IASTExpression)$2,(ASTSequence)$4,(ASTSequence)$6); }
+	| WHILE Expression DO InstrList 				{ $$ = new ASTWhile((IASTExpression)$2,(ASTSequence)$4); }
 ;
 
 Expression : 
@@ -192,29 +192,29 @@ Expression :
  	| FALSE 							{ $$ = ASTExpression.FALSE; }
 	| NUM 								{ $$ = new ASTNum($1); }
 	| Id 								{ $$ = $1; }
-	| Expression GET Id 				{ $$ = new ASTGet((ASTExpression)$1,(ASTid)$3); }
-	| Expression GET Id '(' ArgList ')' { $$ = new ASTCall((ASTExpression)$1,(ASTid)$3,(ArrayList<ASTExpression>)$5); }
-	| NOT Expression 					{ $$ = new NotOperator((ASTExpression)$2); }
-	| Expression AND Expression 		{ $$ = new AndOperator((ASTExpression)$1,(ASTExpression)$3); }
-    | Expression OR Expression 			{ $$ = new OrOperator((ASTExpression)$1,(ASTExpression)$3); }
-	| Expression ADD Expression 		{ $$ = new AddOperator((ASTExpression)$1,(ASTExpression)$3); }
-	| Expression SUB Expression 		{ $$ = new SubOperator((ASTExpression)$1,(ASTExpression)$3); }
-	| Expression MUL Expression 		{ $$ = new MultOperator((ASTExpression)$1,(ASTExpression)$3); }
-	| Expression DIV Expression 		{ $$ = new DivOperator((ASTExpression)$1,(ASTExpression)$3); }
-    | Expression EQ Expression 			{ $$ = new EqualsOperator((ASTExpression)$1,(ASTExpression)$3); }
-	| Expression LT Expression 			{ $$ = new LessThanOperator((ASTExpression)$1,(ASTExpression)$3); }
+	| Expression GET Id 				{ $$ = new ASTGet((IASTExpression)$1,(ASTid)$3); }
+	| Expression GET Id '(' ArgList ')' { $$ = new ASTCall((IASTExpression)$1,(ASTid)$3,(ArrayList<IASTExpression>)$5); }
+	| NOT Expression 					{ $$ = new NotOperator((IASTExpression)$2); }
+	| Expression AND Expression 		{ $$ = new AndOperator((IASTExpression)$1,(IASTExpression)$3); }
+    | Expression OR Expression 			{ $$ = new OrOperator((IASTExpression)$1,(IASTExpression)$3); }
+	| Expression ADD Expression 		{ $$ = new AddOperator((IASTExpression)$1,(IASTExpression)$3); }
+	| Expression SUB Expression 		{ $$ = new SubOperator((IASTExpression)$1,(IASTExpression)$3); }
+	| Expression MUL Expression 		{ $$ = new MultOperator((IASTExpression)$1,(IASTExpression)$3); }
+	| Expression DIV Expression 		{ $$ = new DivOperator((IASTExpression)$1,(IASTExpression)$3); }
+    | Expression EQ Expression 			{ $$ = new EqualsOperator((IASTExpression)$1,(IASTExpression)$3); }
+	| Expression LT Expression 			{ $$ = new LessThanOperator((IASTExpression)$1,(IASTExpression)$3); }
 	| NEW ClassType 					{ $$ = new ASTNew((ASTClassType)$2); }
-    | Expression INSTANCEOF ClassType 	{ $$ = new ASTInstanceOf((ASTExpression)$1,(ASTClassType)$3); }
+    | Expression INSTANCEOF ClassType 	{ $$ = new ASTInstanceOf((IASTExpression)$1,(ASTClassType)$3); }
 	| '(' Expression ')'  				{ $$ = $2; }
 ;
 	
-ArgList : 	{ $$ = new ArrayList<ASTExpression>(); }
+ArgList : 	{ $$ = new ArrayList<IASTExpression>(); }
 	| Args 	{ $$ = $1; }
 ;
 
 Args : Expression 			{ $$ = $1; }
-     | Args "," Expression 	{ ArrayList<ASTExpression> expressions=(ArrayList<ASTExpression>)$1;
-     						expressions.add((ASTExpression)$3);
+     | Args "," Expression 	{ ArrayList<IASTExpression> expressions=(ArrayList<IASTExpression>)$1;
+     						expressions.add((IASTExpression)$3);
      						$$ = expressions; }
 ;
 

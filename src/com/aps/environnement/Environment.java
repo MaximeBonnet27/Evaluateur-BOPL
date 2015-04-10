@@ -13,7 +13,7 @@ public class Environment implements IEnvironment{
 		this.value = value;
 	}
 	
-	public Object getValue(String key) throws Exception{
+	public Object getValue(String key){
 		if(this.key.equals(key))
 			return value;
 		else
@@ -26,6 +26,7 @@ public class Environment implements IEnvironment{
 		this.key = key;
 		this.value = value; 
 		return this;*/
+		//System.out.println("Value mise dans env "+ key +" -> "+ value);
 		return new Environment(this, key, value);
 	}
 	
@@ -41,7 +42,7 @@ public class Environment implements IEnvironment{
 	
 	@Override
 	public IEnvironment concatener(IEnvironment other) {
-		return new Environment(oldEnv.concatener(other), key, other);
+		return new Environment(oldEnv.concatener(other), key, value);
 		/*
 		IEnvironment resultat = next();
 		while(!(resultat.next() instanceof EmptyEnvironment))
@@ -52,8 +53,8 @@ public class Environment implements IEnvironment{
 	}
 
 	@Override
-	protected Object clone(){
-		return new Environment(oldEnv, key, value);
+	public IEnvironment clone(){
+		return new Environment(oldEnv.clone(), key, value);
 	}
 
 	@Override
@@ -73,6 +74,12 @@ public class Environment implements IEnvironment{
 		oldEnv=next;
 	}
 	
+	public String toString(){
+		String res = "" + key + " -> " + value;
+		res = res + "\n" + next().toString();
+		return res;
+	}
+	
 	/*************************************/
 	
 	
@@ -85,6 +92,7 @@ public class Environment implements IEnvironment{
 
 		@Override
 		public IEnvironment extend(String key, Object value) {
+			//System.out.println("Value mise dans env empty "+ key +" -> "+ value);
 			return new Environment(this, key, value);
 		}
 
@@ -112,6 +120,15 @@ public class Environment implements IEnvironment{
 		public void setNext(IEnvironment next) {
 			
 		}
+		
+		public String toString(){
+			return "EMPTY\n";
+		}
+		
+		public IEnvironment clone(){
+			return this;
+		}
+
 		
 	}
 

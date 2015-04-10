@@ -697,7 +697,7 @@ break;
 case 5:
 //#line 84 "lexer/bopl.y"
 {ArrayList<ASTClass> classes=(ArrayList<ASTClass>)val_peek(0).obj;
-       								classes.add((ASTClass)val_peek(1).obj);
+       								classes.add(0,(ASTClass)val_peek(1).obj);
        								yyval.obj=classes;}
 break;
 case 6:
@@ -757,7 +757,7 @@ break;
 case 19:
 //#line 119 "lexer/bopl.y"
 { ArrayList<ASTDeclaration> declarations = (ArrayList<ASTDeclaration>) val_peek(1).obj;
-						declarations.add((ASTDeclaration)val_peek(0).obj);
+						declarations.add(0,(ASTDeclaration)val_peek(0).obj);
 						yyval.obj = declarations; }
 break;
 case 20:
@@ -773,7 +773,7 @@ break;
 case 22:
 //#line 130 "lexer/bopl.y"
  	{ ArrayList<ASTid> ids = (ArrayList<ASTid>) val_peek(0).obj;
-					ids.add((ASTid)val_peek(2).obj);
+					ids.add(0,(ASTid)val_peek(2).obj);
 					yyval.obj = ids; }
 break;
 case 23:
@@ -789,7 +789,7 @@ break;
 case 25:
 //#line 141 "lexer/bopl.y"
 { ArrayList<ASTMethod> methods=(ArrayList<ASTMethod> ) val_peek(1).obj;
-						methods.add((ASTMethod)val_peek(0).obj);
+						methods.add(0,(ASTMethod)val_peek(0).obj);
 						yyval.obj = methods; }
 break;
 case 26:
@@ -847,31 +847,31 @@ case 36:
 break;
 case 37:
 //#line 180 "lexer/bopl.y"
-{ yyval.obj = new ASTCall((ASTExpression)val_peek(5).obj,(ASTid)val_peek(3).obj,(ArrayList<ASTExpression>)val_peek(1).obj); }
+{ yyval.obj = new ASTCall((IASTExpression)val_peek(5).obj,(ASTid)val_peek(3).obj,(ArrayList<IASTExpression>)val_peek(1).obj); }
 break;
 case 38:
 //#line 181 "lexer/bopl.y"
-{ yyval.obj = new ASTSetVar((ASTid)val_peek(2).obj,(ASTExpression)val_peek(0).obj); }
+{ yyval.obj = new ASTSetVar((ASTid)val_peek(2).obj,(IASTExpression)val_peek(0).obj); }
 break;
 case 39:
 //#line 182 "lexer/bopl.y"
-{ yyval.obj = new ASTSetField((ASTExpression)val_peek(4).obj,(ASTid)val_peek(2).obj,(ASTExpression)val_peek(0).obj); }
+{ yyval.obj = new ASTSetField((IASTExpression)val_peek(4).obj,(ASTid)val_peek(2).obj,(IASTExpression)val_peek(0).obj); }
 break;
 case 40:
 //#line 183 "lexer/bopl.y"
-{ yyval.obj = new ASTReturn((ASTExpression)val_peek(0).obj);}
+{ yyval.obj = new ASTReturn((IASTExpression)val_peek(0).obj);}
 break;
 case 41:
 //#line 184 "lexer/bopl.y"
-{ yyval.obj = new ASTWrite((ASTExpression)val_peek(0).obj); }
+{ yyval.obj = new ASTWrite((IASTExpression)val_peek(0).obj); }
 break;
 case 42:
 //#line 185 "lexer/bopl.y"
-{ yyval.obj = new ASTAlternative((ASTExpression)val_peek(4).obj,(ASTSequence)val_peek(2).obj,(ASTSequence)val_peek(0).obj); }
+{ yyval.obj = new ASTAlternative((IASTExpression)val_peek(4).obj,(ASTSequence)val_peek(2).obj,(ASTSequence)val_peek(0).obj); }
 break;
 case 43:
 //#line 186 "lexer/bopl.y"
-{ yyval.obj = new ASTWhile((ASTExpression)val_peek(2).obj,(ASTSequence)val_peek(0).obj); }
+{ yyval.obj = new ASTWhile((IASTExpression)val_peek(2).obj,(ASTSequence)val_peek(0).obj); }
 break;
 case 44:
 //#line 190 "lexer/bopl.y"
@@ -895,47 +895,47 @@ case 48:
 break;
 case 49:
 //#line 195 "lexer/bopl.y"
-{ yyval.obj = new ASTGet((ASTExpression)val_peek(2).obj,(ASTid)val_peek(0).obj); }
+{ yyval.obj = new ASTGet((IASTExpression)val_peek(2).obj,(ASTid)val_peek(0).obj); }
 break;
 case 50:
 //#line 196 "lexer/bopl.y"
-{ yyval.obj = new ASTCall((ASTExpression)val_peek(5).obj,(ASTid)val_peek(3).obj,(ArrayList<ASTExpression>)val_peek(1).obj); }
+{ yyval.obj = new ASTCall((IASTExpression)val_peek(5).obj,(ASTid)val_peek(3).obj,(ArrayList<IASTExpression>)val_peek(1).obj); }
 break;
 case 51:
 //#line 197 "lexer/bopl.y"
-{ yyval.obj = new NotOperator((ASTExpression)val_peek(0).obj); }
+{ yyval.obj = new NotOperator((IASTExpression)val_peek(0).obj); }
 break;
 case 52:
 //#line 198 "lexer/bopl.y"
-{ yyval.obj = new AndOperator((ASTExpression)val_peek(2).obj,(ASTExpression)val_peek(0).obj); }
+{ yyval.obj = new AndOperator((IASTExpression)val_peek(2).obj,(IASTExpression)val_peek(0).obj); }
 break;
 case 53:
 //#line 199 "lexer/bopl.y"
-{ yyval.obj = new OrOperator((ASTExpression)val_peek(2).obj,(ASTExpression)val_peek(0).obj); }
+{ yyval.obj = new OrOperator((IASTExpression)val_peek(2).obj,(IASTExpression)val_peek(0).obj); }
 break;
 case 54:
 //#line 200 "lexer/bopl.y"
-{ yyval.obj = new AddOperator((ASTExpression)val_peek(2).obj,(ASTExpression)val_peek(0).obj); }
+{ yyval.obj = new AddOperator((IASTExpression)val_peek(2).obj,(IASTExpression)val_peek(0).obj); }
 break;
 case 55:
 //#line 201 "lexer/bopl.y"
-{ yyval.obj = new SubOperator((ASTExpression)val_peek(2).obj,(ASTExpression)val_peek(0).obj); }
+{ yyval.obj = new SubOperator((IASTExpression)val_peek(2).obj,(IASTExpression)val_peek(0).obj); }
 break;
 case 56:
 //#line 202 "lexer/bopl.y"
-{ yyval.obj = new MultOperator((ASTExpression)val_peek(2).obj,(ASTExpression)val_peek(0).obj); }
+{ yyval.obj = new MultOperator((IASTExpression)val_peek(2).obj,(IASTExpression)val_peek(0).obj); }
 break;
 case 57:
 //#line 203 "lexer/bopl.y"
-{ yyval.obj = new DivOperator((ASTExpression)val_peek(2).obj,(ASTExpression)val_peek(0).obj); }
+{ yyval.obj = new DivOperator((IASTExpression)val_peek(2).obj,(IASTExpression)val_peek(0).obj); }
 break;
 case 58:
 //#line 204 "lexer/bopl.y"
-{ yyval.obj = new EqualsOperator((ASTExpression)val_peek(2).obj,(ASTExpression)val_peek(0).obj); }
+{ yyval.obj = new EqualsOperator((IASTExpression)val_peek(2).obj,(IASTExpression)val_peek(0).obj); }
 break;
 case 59:
 //#line 205 "lexer/bopl.y"
-{ yyval.obj = new LessThanOperator((ASTExpression)val_peek(2).obj,(ASTExpression)val_peek(0).obj); }
+{ yyval.obj = new LessThanOperator((IASTExpression)val_peek(2).obj,(IASTExpression)val_peek(0).obj); }
 break;
 case 60:
 //#line 206 "lexer/bopl.y"
@@ -943,7 +943,7 @@ case 60:
 break;
 case 61:
 //#line 207 "lexer/bopl.y"
-{ yyval.obj = new ASTInstanceOf((ASTExpression)val_peek(2).obj,(ASTClassType)val_peek(0).obj); }
+{ yyval.obj = new ASTInstanceOf((IASTExpression)val_peek(2).obj,(ASTClassType)val_peek(0).obj); }
 break;
 case 62:
 //#line 208 "lexer/bopl.y"
@@ -951,7 +951,7 @@ case 62:
 break;
 case 63:
 //#line 211 "lexer/bopl.y"
-{ yyval.obj = new ArrayList<ASTExpression>(); }
+{ yyval.obj = new ArrayList<IASTExpression>(); }
 break;
 case 64:
 //#line 212 "lexer/bopl.y"
@@ -963,8 +963,8 @@ case 65:
 break;
 case 66:
 //#line 216 "lexer/bopl.y"
-{ ArrayList<ASTExpression> expressions=(ArrayList<ASTExpression>)val_peek(2).obj;
-     						expressions.add((ASTExpression)val_peek(0).obj);
+{ ArrayList<IASTExpression> expressions=(ArrayList<IASTExpression>)val_peek(2).obj;
+     						expressions.add((IASTExpression)val_peek(0).obj);
      						yyval.obj = expressions; }
 break;
 //#line 893 "Parser.java"

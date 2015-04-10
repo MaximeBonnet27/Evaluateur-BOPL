@@ -4,8 +4,8 @@
 package com.aps.ast.instructions;
 
 import com.aps.ast.AST;
-import com.aps.ast.expressions.ASTExpression;
 import com.aps.ast.expressions.ASTid;
+import com.aps.ast.expressions.IASTExpression;
 import com.aps.environnement.IEnvironment;
 
 /**
@@ -15,9 +15,9 @@ import com.aps.environnement.IEnvironment;
 public class ASTSetVar extends ASTInstruction {
 
 	private ASTid id;
-	private ASTExpression exp;
+	private IASTExpression exp;
 
-	public ASTSetVar(ASTid id, ASTExpression exp) {
+	public ASTSetVar(ASTid id, IASTExpression exp) {
 		super();
 		this.id = id;
 		this.exp = exp;

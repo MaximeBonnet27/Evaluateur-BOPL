@@ -5,6 +5,7 @@ package com.aps.ast.instructions;
 
 import com.aps.ast.AST;
 import com.aps.ast.expressions.ASTExpression;
+import com.aps.ast.expressions.IASTExpression;
 import com.aps.environnement.IEnvironment;
 
 /**
@@ -13,11 +14,11 @@ import com.aps.environnement.IEnvironment;
  */
 public class ASTAlternative extends ASTInstruction{
 
-	private ASTExpression condition;
+	private IASTExpression condition;
 	private ASTSequence seq1;
 	private ASTSequence seq2;
 	
-	public ASTAlternative(ASTExpression condition, ASTSequence seq1,
+	public ASTAlternative(IASTExpression condition, ASTSequence seq1,
 			ASTSequence seq2) {
 		super();
 		this.condition = condition;

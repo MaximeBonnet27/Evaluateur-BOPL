@@ -19,11 +19,11 @@ import com.aps.environnement.IEnvironment;
  *
  */
 public class ASTCall extends AST implements IASTInstruction, IASTExpression{
-	private ASTExpression instance;
+	private IASTExpression instance;
 	private ASTid methode;
-	private ArrayList<ASTExpression> args;
+	private ArrayList<IASTExpression> args;
 	
-	public ASTCall(ASTExpression instance, ASTid methode, ArrayList<ASTExpression> args) {
+	public ASTCall(IASTExpression instance, ASTid methode, ArrayList<IASTExpression> args) {
 		super();
 		this.instance = instance;
 		this.methode = methode;
@@ -32,13 +32,25 @@ public class ASTCall extends AST implements IASTInstruction, IASTExpression{
 
 	@Override
 	public Object eval(IEnvironment env) throws Exception{
+		
 		ASTInstance instance= (ASTInstance) this.instance.eval(env);
-		return ((ASTMethod)((ASTMethod)(methode.eval(instance.getDictionnaire()))).clone()).call(env,instance, args);
+		System.out.println("*************environNement SELF="+instance.getClasseName()+"*************");
+		System.out.println(instance.getDictionnaire());
+		System.out.println("*******************************************");
+		System.out.println("************environnement SUPER="+((ASTInstance)instance.getDictionnaire().getValue("super")).getClasseName()+"************");
+		System.out.println(((ASTInstance)instance.getDictionnaire().getValue("super")).getDictionnaire());
+		System.out.println("*******************************************");
+		System.out.println(methode);
+		ASTMethod m=instance.getMethode(methode.toString());
+		if(m==null)
+			System.out.println("nULLLLLLLLLLLLLLLLLLLLL");
+		m = (ASTMethod)m.clone();
+		return m.call(env,instance, args);
 	}
 
 	@Override
-	public Object clone() {
-		return new ASTCall((ASTExpression)instance.clone(), (ASTid)methode.clone(), (ArrayList<ASTExpression>)args.clone());
+	public IASTExpression clone() {
+		return new ASTCall(instance.clone(), (ASTid)methode.clone(), (ArrayList<IASTExpression>)args.clone());
 	}
 	
 	

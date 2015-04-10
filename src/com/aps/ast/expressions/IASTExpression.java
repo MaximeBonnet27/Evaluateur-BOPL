@@ -10,5 +10,5 @@ import com.aps.ast.IAST;
  *
  */
 public interface IASTExpression extends IAST{
-
+	public IASTExpression clone();
 }
