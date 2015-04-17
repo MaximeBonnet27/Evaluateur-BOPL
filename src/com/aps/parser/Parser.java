@@ -475,7 +475,7 @@ final static String yyrule[] = {
 "Args : Args ',' Expression",
 };
 
-//#line 222 "lexer/bopl.y"
+//#line 224 "lexer/bopl.y"
 
 private Yylex lexer;
 public static IAST ast;
@@ -959,15 +959,17 @@ case 64:
 break;
 case 65:
 //#line 215 "lexer/bopl.y"
-{ yyval.obj = val_peek(0).obj; }
+{ ArrayList<IASTExpression> expressions=new ArrayList<IASTExpression>();
+                            expressions.add((IASTExpression)val_peek(0).obj);
+                            yyval.obj = expressions; }
 break;
 case 66:
-//#line 216 "lexer/bopl.y"
+//#line 218 "lexer/bopl.y"
 { ArrayList<IASTExpression> expressions=(ArrayList<IASTExpression>)val_peek(2).obj;
      						expressions.add((IASTExpression)val_peek(0).obj);
      						yyval.obj = expressions; }
 break;
-//#line 893 "Parser.java"
+//#line 895 "Parser.java"
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####

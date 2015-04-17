@@ -48,7 +48,6 @@ public class ASTMethod extends AST {
 	
 	@Override
 	public Object eval(IEnvironment env) throws Exception{
-		//envLocal=Environment.EMPTYENV;
 		envLocal=env.clone();
 		for(ASTDeclaration arg : args){
 			envLocal=(IEnvironment) arg.eval(envLocal);
@@ -62,17 +61,12 @@ public class ASTMethod extends AST {
 	}
 	
 	public Object call(IEnvironment env,ASTInstance instance,ArrayList<IASTExpression> arguments) throws Exception{
+		IEnvironment cloneEnvLocal=envLocal.clone();
 		for(int i=0;i<args.size();i++){
-			envLocal.update(args.get(i).getId(0).toString(), arguments.get(i).eval(env));
+			cloneEnvLocal.update(args.get(i).getId(0).toString(), arguments.get(i).eval(env));
 		}
-		envLocal=envLocal.concatener(instance.getDictionnaire());
-		//envLocal=envLocal.concatener(env);
-		//envLocal=instance.deSucrage(envLocal);
-		System.out.println("*******************************");
-		System.out.println(envLocal);
-		System.out.println("*******************************");
-		return seq.eval(envLocal);
-		
+		cloneEnvLocal=cloneEnvLocal.concatener(instance.getDictionnaire());
+		return seq.eval(cloneEnvLocal);
 	}
 
 	@Override

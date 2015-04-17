@@ -212,7 +212,9 @@ ArgList : 	{ $$ = new ArrayList<IASTExpression>(); }
 	| Args 	{ $$ = $1; }
 ;
 
-Args : Expression 			{ $$ = $1; }
+Args : Expression 			{ ArrayList<IASTExpression> expressions=new ArrayList<IASTExpression>();
+                            expressions.add((IASTExpression)$1);
+                            $$ = expressions; }
      | Args "," Expression 	{ ArrayList<IASTExpression> expressions=(ArrayList<IASTExpression>)$1;
      						expressions.add((IASTExpression)$3);
      						$$ = expressions; }

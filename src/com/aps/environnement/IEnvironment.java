@@ -7,6 +7,6 @@ public interface IEnvironment {
 	public IEnvironment extend(String key, Object value);
 	public void update(String key, Object value) throws Exception;
 	public IEnvironment concatener(IEnvironment other);
-	public void print();
+	public void print(String message);
 	public IEnvironment clone();
 }

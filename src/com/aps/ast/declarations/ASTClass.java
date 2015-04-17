@@ -44,17 +44,17 @@ public class ASTClass extends ASTExpression{
 
 	@Override
 	public Object eval(IEnvironment env)throws Exception{
-			superClass=(ASTClass) superClassType.eval(env);
-			this.dictionnaireClasse=Environment.EMPTYENV;
+		superClass=(ASTClass) superClassType.eval(env);
+		this.dictionnaireClasse=Environment.EMPTYENV;
 
-		for(ASTDeclaration d : fields){
-			dictionnaireClasse=(IEnvironment) d.eval(dictionnaireClasse);
-		}
 		for(ASTMethod m : methods){
 			dictionnaireClasse=(IEnvironment)m.eval(dictionnaireClasse);
 		}
+		for(ASTDeclaration d : fields){
+			dictionnaireClasse=(IEnvironment) d.eval(dictionnaireClasse);
+		}
 
-		
+
 		return env.extend(name.toString(), this);
 	}
 
@@ -75,7 +75,7 @@ public class ASTClass extends ASTExpression{
 		return name.toString();
 	}
 
-	
+
 	public ASTClass getSuperClass() {
 		return superClass;
 	}
@@ -95,7 +95,7 @@ public class ASTClass extends ASTExpression{
 			}
 		}
 		if(superClass != null)
-		res.addAll(superClass.getFields());
+			res.addAll(superClass.getFields());
 		return res;
 	}
 

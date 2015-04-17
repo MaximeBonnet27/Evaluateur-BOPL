@@ -58,10 +58,10 @@ public class Environment implements IEnvironment{
 	}
 
 	@Override
-	public void print() {
-		System.out.println(key+" : "+value);
-		oldEnv.print();
-		
+	public void print(String message) {
+		System.out.println("**********"+message+"*********************");
+		System.out.println(this);
+		System.out.println("**********"+message+"*********************");
 	}
 
 	@Override
@@ -107,8 +107,10 @@ public class Environment implements IEnvironment{
 		}
 
 		@Override
-		public void print() {
-
+		public void print(String message) {
+			System.out.println("**********"+message+"*********************");
+			System.out.println(this);
+			System.out.println("**********"+message+"*********************");
 		}
 
 		@Override

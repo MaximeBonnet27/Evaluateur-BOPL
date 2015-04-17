@@ -53,5 +53,12 @@ public class ASTDeclaration extends AST{
 		return new ASTDeclaration((ASTClassType)classe.clone(), (ASTid)variables.clone());
 	}
 	
+	public boolean contains(String name){
+		for(ASTid id: getVariables()){
+			if(id.toString().equals(name))
+				return true;
+		}
+		return false;
+	}
 	
 }

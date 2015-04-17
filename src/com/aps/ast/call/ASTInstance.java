@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import com.aps.ast.AST;
 import com.aps.ast.declarations.ASTClass;
 import com.aps.ast.declarations.ASTClassType;
+import com.aps.ast.declarations.ASTDeclaration;
 import com.aps.ast.declarations.ASTMethod;
 import com.aps.ast.expressions.ASTid;
 import com.aps.environnement.IEnvironment;
@@ -37,6 +38,10 @@ public class ASTInstance extends AST {
 		return this.classe.getDictionnaireClasse();
 	}
 
+	public void setDictionnaire(IEnvironment dictionnaireClasse) {
+		this.classe.setDictionnaireClasse(dictionnaireClasse);
+	}
+	
 	public String getClasseName(){
 		return classe.getName();
 	}
@@ -103,4 +108,7 @@ public class ASTInstance extends AST {
 		return env;
 	}
 
+	public ArrayList<String> getFields(){
+		return classe.getFields();
+	}
 }

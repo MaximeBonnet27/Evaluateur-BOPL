@@ -31,7 +31,6 @@ public class ASTCall extends AST implements IASTInstruction, IASTExpression{
 
 	@Override
 	public Object eval(IEnvironment env) throws Exception{
-		
 		ASTInstance instance= (ASTInstance) this.instance.eval(env);
 		ASTMethod m=instance.getMethode(methode.toString());
 		m = (ASTMethod)m.clone();

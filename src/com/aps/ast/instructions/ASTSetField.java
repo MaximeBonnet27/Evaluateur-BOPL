@@ -31,7 +31,6 @@ public class ASTSetField extends ASTInstruction{
 	@Override
 	public Object eval(IEnvironment env)throws Exception{
 		ASTInstance instance=(ASTInstance) obj.eval(env);
-		//instance.getDictionnaire().update(field.toString(), exp.eval(env));
 		instance.updateAttribute(field.toString(), exp.eval(env));
 		return AST.CONSTANT_NULL;
 	}

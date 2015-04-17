@@ -42,7 +42,7 @@ public class ASTProgram extends AST{
 		
 		System.out.println("Environnement:"
 				+ "[");
-		env.print();
+		System.out.println(env);
 		System.out.println("]");
 		
 		return resultat;

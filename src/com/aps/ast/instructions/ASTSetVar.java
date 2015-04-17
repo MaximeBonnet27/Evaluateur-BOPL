@@ -4,6 +4,7 @@
 package com.aps.ast.instructions;
 
 import com.aps.ast.AST;
+import com.aps.ast.call.ASTInstance;
 import com.aps.ast.expressions.ASTid;
 import com.aps.ast.expressions.IASTExpression;
 import com.aps.environnement.IEnvironment;
@@ -25,7 +26,15 @@ public class ASTSetVar extends ASTInstruction {
 
 	@Override
 	public Object eval(IEnvironment env) throws Exception {
-		env.update(id.toString(), exp.eval(env));
+		Object val=exp.eval(env);
+		try{
+			env.update(id.toString(), val);
+		}catch(Exception e){
+			ASTid self=new ASTid("self");
+			ASTInstance instance=(ASTInstance) self.eval(env);
+			instance.updateAttribute(id.toString(), val);
+		}
+		
 		return AST.CONSTANT_NULL;
 	}
 
